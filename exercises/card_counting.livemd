@@ -85,7 +85,7 @@ Enter your solution below.
 
 ```elixir
 low = -1
-nrml = 0
+normal = 0
 high = 1
 ```
 
@@ -106,8 +106,8 @@ initial_count + high
 Enter your solution below.
 
 ```elixir
-init_count = 0
-next_count = init_count + high
+initial_count = 0
+initial_count + high
 ```
 
 ## Low Card
@@ -127,8 +127,8 @@ initial_count + low
 Enter your solution below.
 
 ```elixir
-init_count = 0
-next_count = init_count + low
+initial_count = 0
+initial_count + low
 ```
 
 ## Multiple Cards
@@ -150,8 +150,8 @@ You could omit the **normal** cards or allow **high** and **low** cards to balan
 Enter your solution below.
 
 ```elixir
-init_count = 0
-next_count = init_count + 5 * high + 2 * low + 2 * nrml
+initial_count = 5
+initial_count + 5 * high + 2 * low + 2 * normal
 ```
 
 ## Bonus: Determining Card Values
@@ -197,7 +197,7 @@ calc_score = fn value ->
   cond do
     value <= 6 -> low
     value >= 10 -> high
-    true -> nrml
+    true -> normal
   end
 end
 
