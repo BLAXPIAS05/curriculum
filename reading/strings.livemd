@@ -219,7 +219,7 @@ Consider the following resource(s) to deepend your understanding of the topic.
 * [Joy of Elixir: Strings](https://joyofelixir.com/book#chapter-8)
 * [Elixir-lang: binaries, strings, and charlists](https://elixir-lang.org/getting-started/binaries-strings-and-char-lists.html)
 
-## Commit Your Progress
+<!-- livebook:{"break_markdown":true} -->
 
 DockYard Academy now recommends you use the latest [Release](https://github.com/DockYard-Academy/curriculum/releases) rather than forking or cloning our repository.
 
@@ -236,6 +236,8 @@ We're proud to offer our open-source curriculum free of charge for anyone to lea
 
 We also offer a paid course where you can learn from an instructor alongside a cohort of your peers.
 We will accept applications for the June-August 2023 cohort soon.
+
+## Commit Your Progress
 
 ## Navigation
 
