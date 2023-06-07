@@ -182,8 +182,8 @@ Enter your solution below.
       age: 62,
       status: :parent,
       parents: [
-        %{name: "unknown", age: "unknown", status: :grandparent},
-        %{name: "unknown", age: "unknown", status: :grandparent}
+        %{name: "Jonash", age: 82, status: :grandparent},
+        %{name: "Jaina", age: 86, status: :grandparent}
       ]
     },
     %{
