@@ -172,7 +172,7 @@ family_tree = arthur
 Enter your solution below.
 
 ```elixir
-%{
+kylo_ren = %{
   name: "Ben",
   age: 27,
   status: :child,
@@ -197,6 +197,10 @@ Enter your solution below.
     }
   ]
 }
+
+anakins_age = kylo_ren[:parents]
+
+anakins_age
 ```
 
 ## Commit Your Progress

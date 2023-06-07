@@ -260,7 +260,21 @@ put_in(
 Enter your solution below.
 
 ```elixir
-%{
+treasure_map = %{
+  "south ten paces" => %{
+    10 => %{
+      :"east three paces" => %{
+        [1, 2, 3] => %{
+          {"turn", "right"} => %{
+            :dig => "gold"
+          }
+        }
+      }
+    }
+  }
+}
+
+map2 = %{
   treasure_map
   | "south ten paces" => %{
       10 => %{
@@ -272,6 +286,8 @@ Enter your solution below.
       }
     }
 }
+
+map2["south ten paces"][10][:"east three paces"][[1, 2, 3]][{"turn", "right"}][:dig]
 ```
 
 ## Bonus: Pattern Matching
