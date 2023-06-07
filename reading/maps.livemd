@@ -266,9 +266,9 @@ todo = %{title: "finish maps exercise", completed: false}
 </details>
 
 ```elixir
-todo = %{title: "ffinish maps exercise", completed: false}
+todo = %{title: "finish maps exercise", completed: false}
 
-%{completed: true}
+%{todo | completed: true}
 ```
 
 ## Pattern Matching
@@ -349,7 +349,7 @@ Bind `2` and `4` in the following map to variables `two` and `four`.
 Enter your solution below.
 
 ```elixir
-%{two: two, four: four} = %{one: 1, two: 2, three: 3, four: 4}
+%{one: 1, two: 2, three: 3, four: 4} = %{two: two, four: four}
 four
 ```
 
