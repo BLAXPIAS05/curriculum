@@ -66,7 +66,15 @@ Then, return the winning choice of either `:rock`, `:paper`, or `:scissors` that
 Enter your solution below.
 
 ```elixir
+winning_choice = fn choice ->
+  case choice do
+    :rock -> :paper
+    :paper -> :scissors
+    :scissors -> :rock
+  end
+end
 
+winning_choice.(Enum.random([:rock, :paper, :scissors]))
 ```
 
 ## Create Two Player Rock Paper Scissors
@@ -119,7 +127,57 @@ Bind a `player1_choice` and `player2_choice` variable to `:rock`, `:paper`, or `
 Enter your solution below.
 
 ```elixir
+player1_choice = Enum.random([:rock, :paper, :scissors])
+player2_choice = Enum.random([:rock, :paper, :scissors])
 
+IO.inspect(player1_choice)
+IO.inspect(player2_choice)
+
+cond do
+  player1_choice == :rock and player2_choice == :scissors -> "Player 1 wins!"
+  player1_choice == :scissors and player2_choice == :paper -> "Player 1 wins!"
+  player1_choice == :paper and player2_choice == :rock -> "Player 1 wins!"
+  player1_choice == :rock and player2_choice == :paper -> "Player 2 wins!"
+  player1_choice == :paper and player2_choice == :scissors -> "Player 2 wins!"
+  player1_choice == :scissors and player2_choice == :rock -> "Player 2 wins!"
+  player1_choice == :rock and player2_choice == :rock -> "Draw"
+  player1_choice == :paper and player2_choice == :paper -> "Draw"
+  player1_choice == :scissors and player2_choice == :scissors -> "Draw"
+end
+
+# >>>>>>>NONFUCTIONAL<<<<<<<<<
+# winner1 = fn player1_choice ->
+#   case player1_choice do
+#     :rock -> case player2_choice do
+#       :scissors -> "Player 1 wins!"
+#     end
+#     :scissors -> case player2_choice do
+#       :paper -> "Player 1 wins!"
+#     end
+#     :paper -> case player2_choice do
+#       :rock -> "Player 1 wins!"
+#     end
+#     :scissors -> case player2_choice do
+#       :rock -> "Player 2 wins!"
+#     end
+#     :paper -> case player2_choice do
+#       :scissors -> "Player 2 wins!"
+#     end
+#     :rock -> case player2_choice do
+#       :paper -> "Player 2 wins!"
+#     end
+#     :paper -> case player2_choice do
+#       :paper -> "Draw"
+#     end
+#     :scissors -> case player2_choice do
+#       :scissors -> "Draw"
+#     end
+#     :rock -> case player2_choice do
+#       :rock -> "Draw"
+#     end
+#   end
+# end
+# winner1.(player1_choice)
 ```
 
 ## Commit Your Progress
