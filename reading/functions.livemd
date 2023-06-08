@@ -301,7 +301,7 @@ Enter your solution below.
 is_even? = fn int -> rem(int, 2) == 0 end
 is_odd? = fn int -> rem(int, 2) != 0 end
 
-is_odd?.(4)
+is_even?.(4)
 ```
 
 ## Multi-Parameter Functions
@@ -466,7 +466,7 @@ We'll see something like `#Function<42.3316493/1 in :erl_eval.expr/6>` if we try
 Functions are just data as far as our programs are concerned. We can work with them like we would work with any data structure.
 
 ```elixir
-[my_function | _tail] = [fn int -> int * 2 end, 2, 3, 4]
+[my_function | tail] = [fn int -> int * 2 end, 2, 3, 4]
 
 my_function.(10)
 ```
