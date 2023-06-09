@@ -145,39 +145,32 @@ cond do
   player1_choice == :scissors and player2_choice == :scissors -> "Draw"
 end
 
-# >>>>>>>NONFUCTIONAL<<<<<<<<<
-# winner1 = fn player1_choice ->
-#   case player1_choice do
-#     :rock -> case player2_choice do
-#       :scissors -> "Player 1 wins!"
-#     end
-#     :scissors -> case player2_choice do
-#       :paper -> "Player 1 wins!"
-#     end
-#     :paper -> case player2_choice do
-#       :rock -> "Player 1 wins!"
-#     end
-#     :scissors -> case player2_choice do
-#       :rock -> "Player 2 wins!"
-#     end
-#     :paper -> case player2_choice do
-#       :scissors -> "Player 2 wins!"
-#     end
-#     :rock -> case player2_choice do
-#       :paper -> "Player 2 wins!"
-#     end
-#     :paper -> case player2_choice do
-#       :paper -> "Draw"
-#     end
-#     :scissors -> case player2_choice do
-#       :scissors -> "Draw"
-#     end
-#     :rock -> case player2_choice do
-#       :rock -> "Draw"
-#     end
-#   end
-# end
-# winner1.(player1_choice)
+winner = fn player1_choice ->
+  case player1_choice do
+    :rock ->
+      case player2_choice do
+        :scissors -> "Player 1 wins!"
+        :paper -> "Player 2 wins!"
+        :rock -> "Draw"
+      end
+
+    :scissors ->
+      case player2_choice do
+        :paper -> "Player 1 wins!"
+        :rock -> "Player 2 wins!"
+        :scissors -> "Draw"
+      end
+
+    :paper ->
+      case player2_choice do
+        :rock -> "Player 1 wins!"
+        :scissors -> "Player 2 wins!"
+        :paper -> "Draw"
+      end
+  end
+end
+
+winner.(player1_choice)
 ```
 
 ## Commit Your Progress
