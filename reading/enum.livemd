@@ -506,7 +506,7 @@ end)
 Enter your solution below.
 
 ```elixir
-list = [1..10//2]
+list = 2..10//2
 
 Enum.reduce(list, fn integer, accumulator -> integer + accumulator end)
 ```
