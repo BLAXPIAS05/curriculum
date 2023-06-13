@@ -162,6 +162,9 @@ defmodule TicTacToe do
       "A"
   """
   def at(board, coordinate) do
+    {x, y} = coordinate
+    selected_row = Enum.at(board, 2 - y)
+    Enum.at(selected_row, x)
   end
 
   @doc """
@@ -180,6 +183,10 @@ defmodule TicTacToe do
       [[nil, nil, nil], [nil, "O", nil], [nil, nil, nil]]
   """
   def fill(board, coordinate, symbol) do
+    {x, y} = coordinate
+    selected_row = Enum.at(board, 2 - y)
+    updated_row = List.update_at(selected_row, x, fn each -> symbol end)
+    List.update_at(board, 2 - y, fn each -> updated_row end)
   end
 end
 ```
