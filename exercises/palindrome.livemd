@@ -86,6 +86,16 @@ defmodule Palindrome do
     false
   """
   def palindrome?(string) do
+    reverse_string =
+      string
+      |> String.split("", trim: true)
+      |> Enum.reverse()
+      |> Enum.join()
+
+    cond do
+      string == reverse_string -> true
+      string != reverse_string -> false
+    end
   end
 end
 ```
