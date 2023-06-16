@@ -74,6 +74,14 @@ defmodule DataTraversal do
   60
   """
   def sum(keyword_list) do
+    # acc starts as 0
+    # {key, 10} -> acc = 10
+    # {key, 20} -> acc = acc + 20 = 30
+    # {key, 30} -> acc = acc + 30 = 60
+
+    Enum.reduce(keyword_list, 0, fn {key, int}, acc ->
+      acc + int
+    end)
   end
 
   @doc """
@@ -84,6 +92,11 @@ defmodule DataTraversal do
   [key1: 30, key2: 50]
   """
   def aggregate(keyword_list) do
+    # acc starts as [] 
+    # {key1, 10} -> [key1: 10]
+    acc = []
+    {key, int} = {:key1, 10}
+    Keyword.update(acc, :key1, int, fn each -> each + int end)
   end
 
   @doc """
