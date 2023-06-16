@@ -126,11 +126,16 @@ end
 ```elixir
 defmodule Products do
   def all_items do
+    for name <- ["computer", "phone", "tablet"], price <- 1..100 do
+      %{name: name, price: price}
+    end
   end
 
   def search(items, filters) do
   end
 end
+
+Products.all_items()
 ```
 
 ## Commit Your Progress
