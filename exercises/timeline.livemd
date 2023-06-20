@@ -98,6 +98,23 @@ end
 Enter your solution below.
 
 ```elixir
+dates = [~D[2020-01-01], ~D[2020-01-02], ~D[2020-01-22]]
+
+# date_pairs = [{~D[2020-01-01], ~D[2020-01-02]}, {~D[2020-01-02], ~D[2020-01-22]}]
+
+date_pairs = Enum.chunk_every(dates, 2, 1, :discard)
+
+Enum.map(date_pairs, fn each ->
+  [date1, date2] = each
+  Date.diff(date2, date1)
+end)
+
+# result = [1, 20]
+
+# Date.diff(~D[2020-01-22], ~D[2020-01-02])
+```
+
+```elixir
 defmodule Timeline do
   @moduledoc """
   Documentation for `Timeline`
@@ -121,6 +138,11 @@ defmodule Timeline do
     [9, 12, 2]
   """
   def from_dates(dates) do
+    dates
+    |> Enum.chunk_every(2, 1, :discard)
+    |> Enum.map(fn [date1, date2] ->
+      Date.diff(date2, date1)
+    end)
   end
 
   @doc """
