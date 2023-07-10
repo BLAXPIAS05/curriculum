@@ -133,7 +133,11 @@ defmodule Lucas do
     iex> Lucas.number(20)
     15127
   """
+  def number(0), do: 2
+  def number(1), do: 1
+
   def number(n) do
+    number(n - 1) + number(n - 2)
   end
 
   @doc """
@@ -157,7 +161,25 @@ defmodule Lucas do
     [2, 1, 3, 4, 7, 11, 18, 29, 47, 76]
   """
 
-  def sequence(length) do
+  # def sequence(1), do: [2]
+  # def sequence(2), do: [2, 1]
+  # def sequence(size) do
+  #   prev = sequence(size - 1)
+  #   [a, b | _] = Enum.reverse(prev)
+  #   prev ++ [a + b]
+  # end
+
+  def sequence(1), do: [2]
+  def sequence(2), do: [2, 1]
+
+  def sequence(size) do
+    sequence(size, [1, 2])
+  end
+
+  def sequence(3, [a, b | tail]), do: Enum.reverse([a + b, a, b | tail])
+
+  def sequence(size, [a, b | _tail] = acc) do
+    sequence(size - 1, [a + b | acc])
   end
 end
 ```

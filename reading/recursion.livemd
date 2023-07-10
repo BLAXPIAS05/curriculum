@@ -260,7 +260,17 @@ end
 
 ```elixir
 defmodule CountDown do
+  def count(int) do
+    if int <= 0 do
+      IO.puts(int)
+    else
+      IO.puts(int)
+      count(int - 1)
+    end
+  end
 end
+
+CountDown.count(5)
 ```
 
 ### Your Turn
@@ -323,6 +333,17 @@ end
 
 ```elixir
 defmodule CountBetween do
+  def count(finish, finish), do: IO.puts(finish)
+
+  def count(start, finish) when start < finish do
+    IO.puts(start)
+    count(start + 1, finish)
+  end
+
+  def count(start, finish) when start > finish do
+    IO.puts(start)
+    count(start - 1, finish)
+  end
 end
 ```
 
