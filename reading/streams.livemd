@@ -172,27 +172,6 @@ functionality from the [Stream](https://hexdocs.pm/elixir/Stream.html) module an
 
 ## Performance Comparison
 
-```elixir
-Benchee.run(
-  %{
-    "enum" => fn ->
-      1..200
-      |> Enum.map(fn each -> each * 2 end)
-      |> Enum.filter(fn each -> each <= 10 end)
-      |> Enum.take(4)
-    end,
-    "stream" => fn ->
-      1..200
-      |> Stream.map(fn each -> each * 2 end)
-      |> Stream.filter(fn each -> each <= 10 end)
-      |> Stream.take(4)
-      |> Enum.to_list()
-    end
-  },
-  memory_time: 2
-)
-```
-
 While the exact results may vary, you should notice that the stream runs faster and consumes less memory.
 
 ```
@@ -230,7 +209,11 @@ In the Elixir cell below, try refactoring this code using the [Stream](https://h
 ```
 
 ```elixir
-
+1..100
+|> Stream.map(fn each -> div(each, 2) end)
+|> Stream.map(fn each -> each * 3 end)
+|> Stream.filter(fn each -> rem(each, 2) === 0 end)
+|> Enum.take(10)
 ```
 
 ## Stream Gotchas
@@ -402,7 +385,7 @@ flowchart LR
 
 <!-- livebook:{"break_markdown":true} -->
 
-### Your Turn
+nt### Your Turn
 
 Use `Stream.iterate` to implement the collatz conjecture given a `starting_integer` such as `20` as the initial accumulator.
 
@@ -430,7 +413,15 @@ end)
 </details>
 
 ```elixir
+some_integer = 20
 
+Stream.iterate(some_integer, fn int ->
+  cond do
+    rem(int, 2) == 0 -> div(int, 2)
+    rem(int, 2) != 0 -> int * 3 + 1
+  end
+end)
+|> Enum.take_while(fn int -> int != 4 end)
 ```
 
 ### Stream.unfold/2
@@ -491,7 +482,11 @@ end)
 </details>
 
 ```elixir
-
+1
+|> Stream.unfold(fn int ->
+  {int ** 3, int + 1}
+end)
+|> Enum.take(20)
 ```
 
 ## Commit Your Progress
