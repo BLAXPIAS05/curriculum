@@ -404,8 +404,8 @@ end
 Run the code below and you'll notice the process crashes with the message `process attempted to call itself`.
 
 ```elixir
-{:ok, pid} = GenServer.start(SendingSelfExample, [])
-GenServer.call(pid, :talking_to_myself)
+# {:ok, pid} = GenServer.start(SendingSelfExample, [])
+# GenServer.call(pid, :talking_to_myself)
 ```
 
 ## Debugging
