@@ -28,30 +28,32 @@ Access the `"hello"` key's value from the following map:
 
 ```elixir
 string_map = %{"hello" => "world"}
+Map.fetch!(string_map, "hello")
 ```
 
 Access the `:hello` key's value from the following map:
 
 ```elixir
 atom_map = %{hello: "world"}
+Map.fetch!(atom_map, :hello)
 ```
 
 Use pattern matching to bind `1`, `2`, and `3` to variables `one`, `two`, and `three` in the following tuple.
 
 ```elixir
-{1, 2, 3}
+{one, two, three} = {1, 2, 3}
 ```
 
 Use pattern matching to bind the `head` and the `tail` of the following list.
 
 ```elixir
-[1, 2, 3]
+[head | tail] = [1, 2, 3]
 ```
 
 Use pattern matching to bind `:a` and `:b` in the following keyword list to variables `a` and `b`.
 
 ```elixir
-[a: 1, b: 2]
+[{a, 1}, {b, 2}] = [a: 1, b: 2]
 ```
 
 ## Control Flow
@@ -76,6 +78,13 @@ defmodule Grade do
   "D"
   """
   def letter_grade(integer) do
+    cond do
+      integer <= 100 and integer >= 86 -> "A"
+      integer >= 72 and integer <= 85 -> "B"
+      integer >= 62 and integer <= 71 -> "C"
+      integer >= 51 and integer <= 61 -> "D"
+      integer >= 0 and integer <= 50 -> "F"
+    end
   end
 
   @doc """
@@ -93,6 +102,13 @@ defmodule Grade do
   62..71
   """
   def grade_range(letter) do
+    case letter do
+      "A" -> 86..100
+      "B" -> 72..85
+      "C" -> 62..71
+      "D" -> 51..61
+      "F" -> 0..50
+    end
   end
 
   @doc """
@@ -108,6 +124,11 @@ defmodule Grade do
   "20 is a failing grade."
   """
   def pass?(integer) do
+    if integer >= 50 do
+      "#{integer} is a passing grade."
+    else
+      "#{integer} is a failing grade."
+    end
   end
 end
 ```
@@ -125,13 +146,15 @@ erDiagram
 ```
 
 ```elixir
-
+defmodule Post do
+  defstruct title: "some title", content: "some content"
+end
 ```
 
 Create an instance of the `Post` struct you defined above.
 
 ```elixir
-
+%Post{title: "title", content: "content"}
 ```
 
 ## Enumeration
@@ -147,6 +170,7 @@ defmodule Enumeration do
   [2, 4, 6, 8, 10]
   """
   def double(list) do
+    Enum.map(list, fn each -> each * 2 end)
   end
 
   @doc """
@@ -156,6 +180,7 @@ defmodule Enumeration do
   [2, 2, 4]
   """
   def evens(list) do
+    Enum.filter(list, fn each -> rem(each, 2) == 0 end)
   end
 
   @doc """
@@ -165,6 +190,9 @@ defmodule Enumeration do
   8
   """
   def sum_evens(list) do
+    list
+    |> evens()
+    |> Enum.reduce(fn each, acc -> each + acc end)
   end
 end
 ```
@@ -182,19 +210,19 @@ You're going to use the built-in modules to perform the common CRUD (create, rea
 Update (increment) the `:count` key in this map to return `%{count: 2}`.
 
 ```elixir
-%{count: 1}
+Map.update!(%{count: 1}, :count, fn each -> each + 1 end)
 ```
 
 Set the `:greeting` key in this map to be `"hi"` instead of `"hello"`.
 
 ```elixir
-%{greeting: "hello"}
+Map.replace!(%{greeting: "hello"}, :greeting, "hi")
 ```
 
 Delete the `:complete` key from this map to return an empty map.
 
 ```elixir
-%{complete: "task"}
+Map.delete(%{complete: "task"}, :complete)
 ```
 
 ### List
@@ -204,19 +232,19 @@ Delete the `:complete` key from this map to return an empty map.
 Delete the `"a"` element in this list.
 
 ```elixir
-["a", "b", "c"]
+List.delete_at(["a", "b", "c"], 0)
 ```
 
-Insert a `"b"` element at index `1` in this list.
+Insert a "b" element at index `1` in this list.
 
 ```elixir
-["a", "c"]
+List.insert_at(["a", "c"], 1, "b")
 ```
 
 Update the element at index `1` in this list to be lowercase.
 
 ```elixir
-["a", "B", "c"]
+List.update_at(["a", "B", "c"], 1, fn "B" -> "b" end)
 ```
 
 ### Keyword List
@@ -226,7 +254,7 @@ Update the element at index `1` in this list to be lowercase.
 Delete the `:a` key/value pair in this keyword list.
 
 ```elixir
-[a: 1]
+Keyword.delete([a: 1], :a)
 ```
 
 Insert a `:b` key with the value `2` in this keyword list at index `1` to create `[a: 1, b: 2, c: 3]`. Order does matter.
@@ -239,13 +267,13 @@ Remember that you can use `List` functions such as `List.insert_at/3` with keywo
 </details>
 
 ```elixir
-[a: 1, c: 3]
+Keyword.put_new([a: 1, c: 3], :b, 2)
 ```
 
 Retrieve the value for the `:label` key in this keyword list of options.
 
 ```elixir
-[label: "some label"]
+Keyword.fetch!([label: "some label"], :label)
 ```
 
 ## Strings and Regex
@@ -253,31 +281,31 @@ Retrieve the value for the `:label` key in this keyword list of options.
 Split all of the letters in this string to make `["a", "b", "c"]`.
 
 ```elixir
-"abc"
+String.graphemes("abc")
 ```
 
 Find all of the single digit characters in this string to make `["1", "2", "2", "3"]`
 
 ```elixir
-"a1b22c3"
+String.graphemes("a1b22c3") |> Enum.filter(fn each -> Regex.match?(~r/\d/, each) end)
 ```
 
 Determine if the `<<2::2>>` bitstring is a valid binary. This should be `false`.
 
 ```elixir
-<<2::2>>
+is_binary(<<2::2>>)
 ```
 
 Determine if `<<2::2>>` is a bitstring. This should be `true`.
 
 ```elixir
-<<2::2>>
+is_bitstring(<<2::2>>)
 ```
 
 Determine if `"hello"` is a valid binary. This should be `true`.
 
 ```elixir
-"hello"
+is_binary("hello")
 ```
 
 ## Recursion
@@ -290,7 +318,13 @@ defmodule Recursion do
   iex> Recursion.sum([1, 2, 3])
   6
   """
+
+  # INCOMPLETE
+
+  def sum([a, b]), do: a + b
+
   def sum(list) do
+    sum([a, b | tail])
   end
 end
 ```
