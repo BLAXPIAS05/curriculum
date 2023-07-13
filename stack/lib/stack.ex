@@ -10,8 +10,8 @@ defmodule Stack do
 
   use GenServer
 
-  def start_link(_opts) do
-    GenServer.start_link(__MODULE__, [])
+  def start_link(state) do
+    GenServer.start_link(__MODULE__, state)
   end
 
   def push(stack_pid, element) do
